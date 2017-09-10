@@ -13,20 +13,20 @@ function loadData() {
 
     // load streetview
     // YOUR CODE GOES HERE!
-    var street = $("#street").val();
-    var city = $("#city").val();
+    var street = $("#street").val(); //get the input value of street
+    var city = $("#city").val();    //get the input value of city   
     var address = street +','+ city;
     $greeting.text('You want to live at '+address+' ?');
-    $body.append('<img class="bgimg" src="https://maps.googleapis.com/maps/api/streetview?size=600x300&location= '+address+'">');
+    $body.append('<img class="bgimg" src="https://maps.googleapis.com/maps/api/streetview?size=600x300&location= '+address+'">');//changing the background image to the location entereed
 
     // load NYTimes 
-    var NYTurl = 'https://api.nytimes.com/svc/search/v2/articlesearch.json?q=' + city + '&sort=newest&api-key=920e1807cf284da9bffc587e999c1f15';
+    var NYTurl = 'https://api.nytimes.com/svc/search/v2/articlesearch.json?q=' + city + '&sort=newest&api-key=920e1807cf284da9bffc587e999c1f15';//newyork times api
     /*url += '?' + $.param({
         'api-key': "920e1807cf284da9bffc587e999c1f15",
         'q': "'+city+'"
     });*/
 
-    $.getJSON(NYTurl, function(data){
+    $.getJSON(NYTurl, function(data){ //using JSON to display the article
         $nytHeaderElem.text('NYTimes articles about ' + city); //.text replaces the entire element of nytHeaderElem
         articles= data.response.docs;   //gets the responses
         for (var i = 0; i < articles.length; i++){
