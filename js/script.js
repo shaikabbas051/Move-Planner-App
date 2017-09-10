@@ -27,8 +27,8 @@ function loadData() {
     });*/
 
     $.getJSON(NYTurl, function(data){
-        $nytHeaderElem.text('NYTimes articles about ' + city);
-        articles= data.response.docs;
+        $nytHeaderElem.text('NYTimes articles about ' + city); //.text replaces the entire element of nytHeaderElem
+        articles= data.response.docs;   //gets the responses
         for (var i = 0; i < articles.length; i++){
             $nytElem.append('<li class="article">'+
                 '<a href="'+articles[i].web_url+'">'+articles[i].headline.main+'</a>'+
