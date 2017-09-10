@@ -38,7 +38,20 @@ function loadData() {
     .fail(function(e){    //if something went wrong then, it shows the message 
         $nytHeaderElem.text('no article found');
     });
+
+    //Load Wikipedia
+    var wikilink = 'http://en.wikipedia.org/w/api.php?action=opensearch&search='+city+'&format=json&callback=wikiCallback';
+    $.ajax(wikilink,{
+        dataType: "jsonp",
+        success: function(data){
+            var wikipedia = data[1];
+            for (var i = 0; i < wikipedia.length; i++){
+                $wikiElem.append('<li>' +
+                    '<a href="' + 'https://en.wikipedia.org/wiki/'+ wikipedia[i] +'">' + wikipedia[i] + '</a>');
+            }
+        }
+    });
+
     return false;
 }
-
 $('#form-container').submit(loadData);
