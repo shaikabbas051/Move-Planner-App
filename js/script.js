@@ -20,7 +20,7 @@ function loadData() {
     $body.append('<img class="bgimg" src="https://maps.googleapis.com/maps/api/streetview?size=600x300&location= '+address+'">');//changing the background image to the location entereed
 
     // load NYTimes 
-    var NYTurl = 'https://api.nytimes.com/svc/search/v2/articlesearch.json?q=' + city + '&sort=newest&api-key=920e1807cf284da9bffc587e999c1f15';//newyork times api
+    var NYTurl = 'https://api.nytimes.com/svc/search/v2/articlesearch.json?q=' + city + '&sort=newest&api-key=920e1807cf284da9bffc587e999c1f15';//newyork times api(enter this link in the browser to see the exact response)
     /*url += '?' + $.param({
         'api-key': "920e1807cf284da9bffc587e999c1f15",
         'q': "'+city+'"
@@ -34,8 +34,10 @@ function loadData() {
                 '<a href="'+articles[i].web_url+'">'+articles[i].headline.main+'</a>'+
                 '<p>'+articles[i].snippet+'</p>');
         }
+    })
+    .fail(function(e){    //if something went wrong then, it shows the message 
+        $nytHeaderElem.text('no article found');
     });
-
     return false;
 }
 
