@@ -40,14 +40,19 @@ function loadData() {
     });
 
     //Load Wikipedia
+    //show the error message if the data is failed to load
+    var wikierror = setTimeout(function(){
+        $wikiElem.text('Fail to get Wiki Links')//error message
+    }, 2000);//if the data is not loaded within this time then it should display the error message 
     var wikilink = 'http://en.wikipedia.org/w/api.php?action=opensearch&search='+city+'&format=json&callback=wikiCallback';
     $.ajax(wikilink,{
-        dataType: "jsonp",
+        dataType: "jsonp", //If a user script or gadget needs to make an API call against another MediaWiki site (e.g. a script on the English Wikipedia needs to check image information on Commons), it must use JSONP or CORS.
         success: function(data){
-            var wikipedia = data[1];
-            for (var i = 0; i < wikipedia.length; i++){
+            var wikipedia = data[1]; //only first element of response is required, so its 1
+            for (var i = 0; i < wikipedia.length; i++){//itterate through the data
                 $wikiElem.append('<li>' +
                     '<a href="' + 'https://en.wikipedia.org/wiki/'+ wikipedia[i] +'">' + wikipedia[i] + '</a>');
+                    clearTimeout(wikierror);//clear timeout if data is successfully loaded
             }
         }
     });
