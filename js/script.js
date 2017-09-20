@@ -44,7 +44,7 @@ function loadData() {
     var wikierror = setTimeout(function(){
         $wikiElem.text('Fail to get Wiki Links')//error message
     }, 2000);//if the data is not loaded within this time then it should display the error message 
-    var wikilink = 'http://en.wikipedia.org/w/api.php?action=opensearch&search='+city+'&format=json&callback=wikiCallback';
+    var wikilink = 'https://en.wikipedia.org/w/api.php?action=opensearch&search='+city+'&format=json&callback=wikiCallback';
     $.ajax(wikilink,{
         dataType: "jsonp", //If a user script or gadget needs to make an API call against another MediaWiki site (e.g. a script on the English Wikipedia needs to check image information on Commons), it must use JSONP or CORS.
         success: function(data){
